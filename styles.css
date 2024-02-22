@@ -10,9 +10,10 @@ body {
 .gallery {
   --size: 100px;
   display: grid;
+  /* having columns twice the number of images and each column being half the size of the images is crucial for this grid system to work */
   grid-template-columns: repeat(6, var(--size));
   grid-auto-rows: var(--size);
-  gap: 1rem;
+  gap: 0.5rem;
   place-items: center;
 }
 
@@ -21,15 +22,27 @@ body {
   height: calc(var(--size) * 2);
   position: relative;
   grid-column: auto/ span 2;
-  clip-path: circle(40%);
+  object-fit: cover;
+
+  clip-path: path(
+    "M90,10 C100,0 100,0 110,10 190,90 190,90 190,90 200,100 200,100 190,110 190,110 110,190 110,190 100,200 100,200 90,190 90,190 10,110 10,110 0,100 0,100 10,90Z"
+  );
+  transition: clip-path 200ms ease, filter 200ms ease;
 }
 
-.gallery-img .img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.gallery-img:hover {
+  clip-path: path(
+    "M0,0 C0,0 200,0 200,0 200,0 200,100 200,100 200,100 200,200 200,200 200,200 100,200 100,200 100,200 100,200 0,200 0,200 0,100 0,100 0,100 0,100 0,100Z"
+  );
+  z-index: 1;
+}
+
+.gallery:has(.gallery-img:hover) .gallery-img:not(:hover) {
+  /* select the gallery if it has a child in hover state and negate the gallery-img child itself that is being hovered */
+  filter: brightness(50%) contrast(50%);
 }
 
 .gallery-img:nth-child(5n-1) {
+  /* select the child that appears after every three children and make it start from 2nd column and span 2 columns as well  */
   grid-column: 2 / span 2;
 }
