@@ -11,3 +11,7 @@ this image configuration makes a pretty way for laying out a gallery.
 
 1. making this layout responsive is kind of a challenge.
 2. creating the "path" can be quite time consuming and difficult.
+
+at the end a BIG THANKS TO Alvaromontoro
+[alvaromontoro](https://www.linkedin.com/in/alvaromontoro/)
+ 
